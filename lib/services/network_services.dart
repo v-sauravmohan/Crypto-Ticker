@@ -30,8 +30,8 @@ class NetworkService {
     _url = '$kDomainMyJsonServer/v-sauravmohan/Crypto-Ticker/posts/';
     _response = await http.get(_url, headers: _headers);
     if (_response.statusCode == 200) {
-      print(jsonDecode(_response.body));
+      return jsonDecode(_response.body);
     }
-    return jsonDecode('bad_response');
+    return 'bad_response';
   }
 }

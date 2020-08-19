@@ -25,7 +25,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
     try {
       var priceData = await networkService.getPriceDataFromBitcoinAverage();
       if (priceData == 'bad_response') {
-        throw 'bad_response';
+        priceData = await networkService.getPriceDataFromMyJsonServer();
+        if (priceData == 'bad_response') {
+          throw 'bad_response';
+        }
       }
       Navigator.pushReplacement(
         context,
@@ -37,7 +40,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       );
     } catch (err) {
       if (err == 'bad_response') {
-        print('bad Response');
+        print('API1 Fail - API2 Fail - NO DATA');
       }
     }
   }
