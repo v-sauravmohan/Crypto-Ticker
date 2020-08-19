@@ -23,7 +23,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   void fetchPreRequisite() async {
     try {
-      var priceData = await networkService.getPriceData();
+      var priceData = await networkService.getPriceDataFromBitcoinAverage();
       if (priceData == 'bad_response') {
         throw 'bad_response';
       }

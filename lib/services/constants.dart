@@ -1,7 +1,9 @@
 // BitCoin Average API Details
 import 'package:flutter/material.dart';
 
-const kDomain = 'https://apiv2.bitcoinaverage.com';
+const kDomainBitCoinAverage = 'https://apiv2.bitcoinaverage.com';
+
+const kDomainMyJsonServer = 'http://my-json-server.typicode.com';
 
 const kCustomHeader = 'x-ba-key';
 

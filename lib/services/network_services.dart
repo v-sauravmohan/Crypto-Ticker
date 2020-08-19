@@ -14,13 +14,23 @@ class NetworkService {
 
   NetworkService({this.cryptoCurrencies, this.currencies});
 
-  Future<dynamic> getPriceData() async {
+  Future<dynamic> getPriceDataFromBitcoinAverage() async {
     var crypto = cryptoCurrencies.join(',');
     var fiat = currencies.join(',');
-    _url = '$kDomain/indices/global/ticker/all?crypto=$crypto&fiat=$fiat';
+    _url =
+        '$kDomainBitCoinAverage/indices/global/ticker/all?crypto=$crypto&fiat=$fiat';
     _response = await http.get(_url, headers: _headers);
     if (_response.statusCode == 200) {
       return jsonDecode(_response.body);
+    }
+    return 'bad_response';
+  }
+
+  Future<dynamic> getPriceDataFromMyJsonServer() async {
+    _url = '$kDomainMyJsonServer/v-sauravmohan/Crypto-Ticker/posts/';
+    _response = await http.get(_url, headers: _headers);
+    if (_response.statusCode == 200) {
+      print(jsonDecode(_response.body));
     }
     return jsonDecode('bad_response');
   }
