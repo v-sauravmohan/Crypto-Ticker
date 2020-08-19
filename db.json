@@ -1,6 +1,5 @@
 {
-  "posts": [
-    {
+  "posts": {
       "BTCAUD": { "high": 16596.6 },
       "BTCBRL": { "high": 64695.88 },
       "BTCCAD": { "high": 15782.65 },
@@ -64,8 +63,7 @@
       "LTCSGD": { "high": 88.9832 },
       "LTCUSD": { "high": 64.9847 },
       "LTCZAR": { "high": 1131.2272 }
-    }
-  ],
+  },
   "profile": {
     "name": "typicode"
   }
