@@ -15,6 +15,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
     currencies: kCurrenciesList,
   );
 
+  bool _isHistoricData = false;
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +28,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       var priceData = await networkService.getPriceDataFromBitcoinAverage();
       if (priceData == 'bad_response') {
         priceData = await networkService.getPriceDataFromMyJsonServer();
+        _isHistoricData = true;
         if (priceData == 'bad_response') {
           throw 'bad_response';
         }
@@ -35,6 +38,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         MaterialPageRoute(builder: (context) {
           return PriceScreen(
             priceData: priceData,
+            isHistoricData: _isHistoricData,
           );
         }),
       );

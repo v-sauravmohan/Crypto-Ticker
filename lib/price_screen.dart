@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:io' show Platform;
 
+import 'components/conditional_dialog.dart';
+import 'components/ticker_card.dart';
 import 'services/constants.dart';
 
 class PriceScreen extends StatefulWidget {
   final dynamic priceData;
+  final bool isHistoricData;
 
-  PriceScreen({this.priceData});
+  PriceScreen({this.priceData, this.isHistoricData});
 
   @override
   _PriceScreenState createState() => _PriceScreenState();
@@ -162,6 +165,11 @@ class _PriceScreenState extends State<PriceScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            ConditionalDialog(
+              isTrue: widget.isHistoricData,
+              dialogForTrue: "This is Historic Data",
+              dialogForFalse: "Updated just now",
+            ),
             TickerCard(
               cryptoCurrency: kCryptoList[0],
               exchangeRate: oneBTC,
@@ -184,49 +192,26 @@ class _PriceScreenState extends State<PriceScreen> {
                   height: 150.0,
                   alignment: Alignment.center,
                   color: kTickerYellow,
-                  child: getDropDownPicker(),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Choose currency :",
+                        style: TextStyle(
+                          color: kTickerBrown,
+                          fontSize: 20.0,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      ),
+                      getDropDownPicker(),
+                    ],
+                  ),
                 ),
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class TickerCard extends StatelessWidget {
-  const TickerCard({
-    Key key,
-    @required this.cryptoCurrency,
-    @required this.exchangeRate,
-    @required this.selectedCurrency,
-  }) : super(key: key);
-
-  final String cryptoCurrency;
-  final String exchangeRate;
-  final String selectedCurrency;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-      child: Card(
-        color: kTickerYellow,
-        elevation: 5.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-          child: Text(
-            '1 $cryptoCurrency = $exchangeRate $selectedCurrency',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.0,
-              color: kTickerBrown,
-            ),
-          ),
         ),
       ),
     );
